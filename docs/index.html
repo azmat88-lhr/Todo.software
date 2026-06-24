@@ -14,128 +14,59 @@
   --accent:#2563eb;
 }
 
-.dark{
-  --bg:#0f172a;
-  --card:#1e293b;
-  --text:#f8fafc;
-}
+.dark{ --bg:#0f172a; --card:#1e293b; --text:#f8fafc; }
 
-body{
-  margin:0;
-  font-family:'Baloo Bhai', 'Segoe UI', sans-serif;
-  background:var(--bg);
-  color:var(--text);
-}
+body{ margin:0; font-family:'Baloo Bhai', 'Segoe UI', sans-serif; background:var(--bg); color:var(--text); }
 
-header{
-  background:var(--accent);
-  color:white;
-  padding:0; /* we control height with min-height */
-}
-
-.header-inner{
-  max-width:1000px;
-  margin:0 auto;
-  position:relative;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  gap:16px;
-  min-height:120px; /* larger blue area */
-  padding:0 20px 0 128px; /* leave room for absolute logo */
-  box-sizing:border-box;
-}
-
-.logo{
-  position:absolute;
-  left:20px;
-  width:96px;
-  height:96px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-
-.logo svg{display:none}
+header{ background:var(--accent); color:white; padding:0; }
+.header-inner{ max-width:1000px; margin:0 auto; position:relative; display:flex; justify-content:center; align-items:center; gap:16px; min-height:120px; padding:0 20px 0 128px; box-sizing:border-box; }
+.logo{ position:absolute; left:20px; width:96px; height:96px; display:flex; align-items:center; justify-content:center; }
 .logo img{width:100%;height:100%;object-fit:contain;display:block}
+header h1{ margin:0; font-size:22px; font-weight:700; text-align:center; }
+.container{ max-width:1000px; margin:auto; padding:20px; }
+.card{ background:var(--card); margin-bottom:15px; border-radius:10px; overflow:hidden; box-shadow:0 3px 10px rgba(0,0,0,.1); }
+.section-title{ padding:15px; cursor:pointer; font-weight:bold; }
+.tasks{ padding:15px; display:none; }
+.task{ margin:8px 0; }
+.task .label{ margin-left:8px; }
+.label.done{ text-decoration: line-through; color:#777; }
+.progress-box{ margin:20px 0; }
+.progress{ width:100%; height:25px; background:#ddd; border-radius:20px; overflow:hidden; }
+.progress-fill{ height:100%; width:0%; background:green; transition:.3s; }
+.controls{ display:flex; gap:10px; margin-bottom:20px; }
 
-header h1{
-  margin:0;
-  font-size:22px;
-  font-weight:700;
-  text-align:center;
-}
+/* Login */
+.login-overlay{ position:fixed; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,.4); }
+.login-card{ background:var(--card); padding:24px; border-radius:10px; width:360px; box-shadow:0 8px 30px rgba(0,0,0,.2); }
+.login-card h2{ margin-top:0 }
+.field{ margin:10px 0; display:flex; flex-direction:column; }
+.field input{ padding:10px; border-radius:8px; border:1px solid #ddd }
+.small{ font-size:13px; color:#444 }
+.demo-list{ background:#f1f5f9; padding:10px; border-radius:8px; margin-top:10px; }
 
-.container{
-  max-width:1000px;
-  margin:auto;
-  padding:20px;
-}
+.confirm-overlay{ position:fixed; inset:0; display:none; align-items:center; justify-content:center; background:rgba(0,0,0,.45); }
+.confirm-box{ background:var(--card); padding:20px; border-radius:12px; width:360px; box-shadow:0 10px 30px rgba(0,0,0,.25); }
+.confirm-box p{ margin:0; font-weight:600; }
+.confirm-buttons{ display:flex; gap:10px; justify-content:flex-end; margin-top:16px }
+.btn-yes{ background:#ef4444; color:white; border:none; padding:8px 14px; border-radius:8px; cursor:pointer }
+.btn-cancel{ background:#e2e8f0; color:#111; border:none; padding:8px 14px; border-radius:8px; cursor:pointer }
 
-.card{
-  background:var(--card);
-  margin-bottom:15px;
-  border-radius:10px;
-  overflow:hidden;
-  box-shadow:0 3px 10px rgba(0,0,0,.1);
-}
+/* login status animations */
+.login-status{ position:relative; height:56px; display:flex; align-items:center; justify-content:center; margin-bottom:8px }
+.status-icon{ width:56px; height:56px; border-radius:50%; display:flex; align-items:center; justify-content:center; transform:scale(0); opacity:0; }
+.status-icon.visible{ animation:pop .45s forwards; }
+.status-icon.success{ background: #1e7e34; color:#fff }
+.status-icon.error{ background: #c82333; color:#fff }
+@keyframes pop{ 0%{ transform:scale(0); opacity:0 } 60%{ transform:scale(1.15); opacity:1 } 100%{ transform:scale(1); opacity:1 } }
+.icon-check, .icon-cross{ width:28px; height:28px; display:inline-block }
+.icon-check svg, .icon-cross svg{ width:100%; height:100%; stroke:currentColor; stroke-width:3; fill:none }
+.icon-check svg{ stroke-linecap:round; stroke-linejoin:round }
+.icon-cross svg{ stroke-linecap:round; stroke-linejoin:round }
 
-.section-title{
-  padding:15px;
-  cursor:pointer;
-  font-weight:bold;
-}
 
-.tasks{
-  padding:15px;
-  display:none;
-}
+@media (max-width:600px){ .controls{flex-direction:column} .header-inner{padding:0 12px 0 80px;gap:10px;min-height:96px} header h1{font-size:18px} .logo{left:12px;width:64px;height:64px} .container{padding:12px} .section-title{font-size:15px} }
 
-.task{
-  margin:8px 0;
-}
-
-.progress-box{
-  margin:20px 0;
-}
-
-.progress{
-  width:100%;
-  height:25px;
-  background:#ddd;
-  border-radius:20px;
-  overflow:hidden;
-}
-
-.progress-fill{
-  height:100%;
-  width:0%;
-  background:green;
-  transition:.3s;
-}
-
-.controls{
-  display:flex;
-  gap:10px;
-  margin-bottom:20px;
-}
-
-@media (max-width:600px){
-  .controls{flex-direction:column}
-  .header-inner{padding:0 12px 0 80px;gap:10px;min-height:96px}
-  header h1{font-size:18px}
-  .logo{left:12px;width:64px;height:64px}
-  .logo svg{width:56px;height:56px}
-  .container{padding:12px}
-  .section-title{font-size:15px}
-}
-
-button{
-  padding:10px 15px;
-  border:none;
-  border-radius:8px;
-  cursor:pointer;
-}
+button{ padding:10px 15px; border:none; border-radius:8px; cursor:pointer; }
 </style>
 </head>
 <body>
@@ -145,213 +76,207 @@ button{
     <div class="logo" aria-hidden="true">
       <img src="lOGO.png" alt="Site logo">
     </div>
-    <h1>Cybersecurity Degree Preparation Tracker</h1>
+    <h1 id="siteTitle">Cybersecurity Degree Preparation Tracker</h1>
   </div>
 </header>
 
-<div class="container">
+<div class="container" id="appContent" style="display:none">
 
 <div class="controls">
-<button onclick="toggleTheme()">🌙 Dark Mode</button>
-<button onclick="resetProgress()">🔄 Reset Progress</button>
+  <div style="flex:1">
+    <button onclick="toggleTheme()">🌙 Dark Mode</button>
+    <button onclick="resetProgress()">🔄 Reset My Progress</button>
+  </div>
+    <div style="display:flex;gap:10px;align-items:center">
+    <div id="currentUserLabel" class="small"></div>
+    <button onclick="requestLogout()">🔓 Logout</button>
+  </div>
 </div>
 
 <div class="progress-box">
-<h3>Overall Progress</h3>
-<div class="progress">
-<div class="progress-fill" id="progressFill"></div>
-</div>
-<p id="progressText">0%</p>
-</div>
+  <h3>Overall Progress</h3>
+  <div class="progress"><div class="progress-fill" id="progressFill"></div></div>
+  <p id="progressText">0%</p>
+ </div>
 
 <div id="roadmap"></div>
 
 </div>
 
+<!-- Login overlay -->
+<div class="login-overlay" id="loginOverlay">
+  <div class="login-card">
+    <h2>Login</h2>
+    <div class="login-status">
+      <div id="statusIcon" class="status-icon" aria-hidden="true">
+        <span class="icon-check" style="display:none"><svg viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></svg></span>
+        <span class="icon-cross" style="display:none"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg></span>
+      </div>
+    </div>
+    <form id="loginForm" onsubmit="handleManualLogin(event)">
+      <div class="field">
+        <label class="small">Username</label>
+        <input id="username" autocomplete="username">
+      </div>
+      <div class="field">
+        <label class="small">Password</label>
+        <input id="password" type="password" autocomplete="current-password">
+      </div>
+      <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:10px">
+        <button type="submit">Login</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Logout confirmation modal -->
+<div id="confirmOverlay" class="confirm-overlay" role="dialog" aria-modal="true">
+  <div class="confirm-box">
+    <p id="confirmMessage">Are you sure you want to leave?</p>
+    <div class="confirm-buttons">
+      <button id="confirmCancel" class="btn-cancel">Cancel</button>
+      <button id="confirmYes" class="btn-yes">Yes</button>
+    </div>
+  </div>
+</div>
+
 <script>
+// Demo users (username:password)
+const users = {
+  me: 'me123',
+  alice: 'alice123',
+  bob: 'bob123'
+};
+
+let currentUser = null;
+
+// Roadmap data (same as before)
 const roadmapData = [
-{
-title:"Month 1 - Computer Fundamentals",
-tasks:[
-"How Computers Work",
-"Hardware vs Software",
-"CPU Fundamentals",
-"RAM Fundamentals",
-"Storage (HDD vs SSD)",
-"Operating Systems",
-"Files and Directories",
-"Binary Numbers",
-"Hexadecimal Numbers",
-"Algorithms Basics"
-]
-},
-{
-title:"Month 2 - Linux",
-tasks:[
-"Install VirtualBox",
-"Install Ubuntu",
-"Linux File System",
-"Terminal Navigation",
-"Linux Permissions",
-"Users and Groups",
-"Package Management",
-"Linux Networking Commands"
-]
-},
-{
-title:"Month 3 - Python",
-tasks:[
-"Variables",
-"Data Types",
-"Loops",
-"Functions",
-"Lists",
-"Dictionaries",
-"File Handling",
-"Calculator Project",
-"Password Generator Project"
-]
-},
-{
-title:"Month 4 - Networking",
-tasks:[
-"IP Addressing",
-"MAC Addresses",
-"DNS",
-"DHCP",
-"TCP",
-"UDP",
-"HTTP",
-"HTTPS",
-"Wireshark"
-]
-},
-{
-title:"Month 5 - Cybersecurity",
-tasks:[
-"CIA Triad",
-"Malware",
-"Phishing",
-"Ransomware",
-"Encryption",
-"Hashing",
-"Authentication",
-"VPNs",
-"Firewalls"
-]
-},
-{
-title:"Month 6 - Ethical Hacking & Portfolio",
-tasks:[
-"Kali Linux",
-"Nmap",
-"Burp Suite",
-"Reconnaissance",
-"Git",
-"GitHub",
-"Portfolio Website",
-"Port Scanner",
-"Password Checker"
-]
-}
+  { title:"Month 1 - Computer Fundamentals", tasks:["How Computers Work","Hardware vs Software","CPU Fundamentals","RAM Fundamentals","Storage (HDD vs SSD)","Operating Systems","Files and Directories","Binary Numbers","Hexadecimal Numbers","Algorithms Basics"] },
+  { title:"Month 2 - Linux", tasks:["Install VirtualBox","Install Ubuntu","Linux File System","Terminal Navigation","Linux Permissions","Users and Groups","Package Management","Linux Networking Commands"] },
+  { title:"Month 3 - Python", tasks:["Variables","Data Types","Loops","Functions","Lists","Dictionaries","File Handling","Calculator Project","Password Generator Project"] },
+  { title:"Month 4 - Networking", tasks:["IP Addressing","MAC Addresses","DNS","DHCP","TCP","UDP","HTTP","HTTPS","Wireshark"] },
+  { title:"Month 5 - Cybersecurity", tasks:["CIA Triad","Malware","Phishing","Ransomware","Encryption","Hashing","Authentication","VPNs","Firewalls"] },
+  { title:"Month 6 - Ethical Hacking & Portfolio", tasks:["Kali Linux","Nmap","Burp Suite","Reconnaissance","Git","GitHub","Portfolio Website","Port Scanner","Password Checker"] }
 ];
 
 const roadmap = document.getElementById("roadmap");
 
+function doLogin(){
+  const u = document.getElementById('username').value.trim();
+  const p = document.getElementById('password').value;
+  if(!u || !p){ showStatus(false); return; }
+  if(users[u] && users[u] === p){
+    showStatus(true, ()=>{
+      currentUser = u;
+      document.getElementById('loginOverlay').style.display = 'none';
+      document.getElementById('appContent').style.display = 'block';
+      document.getElementById('currentUserLabel').textContent = 'Signed in as ' + currentUser;
+      render();
+    });
+  } else { showStatus(false); }
+}
+
+function showStatus(success, cb){
+  const icon = document.getElementById('statusIcon');
+  if(!icon) return;
+  const check = icon.querySelector('.icon-check');
+  const cross = icon.querySelector('.icon-cross');
+  check.style.display = 'none'; cross.style.display = 'none';
+  icon.classList.remove('visible','success','error');
+  if(success){ check.style.display='inline-block'; icon.classList.add('success'); }
+  else { cross.style.display='inline-block'; icon.classList.add('error'); }
+  requestAnimationFrame(()=> icon.classList.add('visible'));
+  setTimeout(()=>{ icon.classList.remove('visible'); if(cb) cb(); }, 900);
+}
+
+function requestLogout(){
+  const overlay = document.getElementById('confirmOverlay');
+  const yes = document.getElementById('confirmYes');
+  const cancel = document.getElementById('confirmCancel');
+  if(!overlay || !yes || !cancel) { logout(); return; }
+  overlay.style.display = 'flex';
+  // attach handlers
+  const onYes = ()=>{ overlay.style.display='none'; yes.removeEventListener('click', onYes); cancel.removeEventListener('click', onCancel); logout(); };
+  const onCancel = ()=>{ overlay.style.display='none'; yes.removeEventListener('click', onYes); cancel.removeEventListener('click', onCancel); };
+  yes.addEventListener('click', onYes);
+  cancel.addEventListener('click', onCancel);
+}
+
+function handleManualLogin(e){
+  if(e && e.preventDefault) e.preventDefault();
+  doLogin();
+}
+
+// demoFill removed — demo credentials are no longer shown in the UI
+
+function logout(){
+  // perform logout immediately (confirmation handled by custom modal)
+  if(window.firebase && firebase.auth && firebase.auth().currentUser){ firebase.auth().signOut().catch(()=>{}); }
+  currentUser = null;
+  document.getElementById('loginOverlay').style.display = 'flex';
+  document.getElementById('appContent').style.display = 'none';
+  const usernameInput = document.getElementById('username');
+  const passwordInput = document.getElementById('password');
+  if(usernameInput) usernameInput.value = '';
+  if(passwordInput) passwordInput.value = '';
+  document.getElementById('siteTitle').textContent = 'Cybersecurity Degree Preparation Tracker';
+}
+
+function storageKey(s,t){
+  return `${currentUser}:${s}:${t}`;
+}
+
 function render(){
-roadmap.innerHTML="";
+  roadmap.innerHTML = '';
+  roadmapData.forEach((section,sIndex)=>{
+    const card = document.createElement('div'); card.className='card';
+    const title = document.createElement('div'); title.className='section-title'; title.textContent = section.title;
+    const tasksDiv = document.createElement('div'); tasksDiv.className='tasks';
+    title.onclick = ()=>{ tasksDiv.style.display = tasksDiv.style.display==='block' ? 'none' : 'block'; };
 
-roadmapData.forEach((section,sIndex)=>{
+    section.tasks.forEach((task,tIndex)=>{
+      const saved = localStorage.getItem(storageKey(sIndex,tIndex)) === 'true';
+      const row = document.createElement('div'); row.className='task';
+      const check = document.createElement('input'); check.type='checkbox'; check.checked = saved;
+      const label = document.createElement('span'); label.className = 'label'; label.textContent = task;
+      if(saved) label.classList.add('done');
+      check.onchange = ()=>{
+        localStorage.setItem(storageKey(sIndex,tIndex), check.checked);
+        label.classList.toggle('done', check.checked);
+        updateProgress();
+      };
+      row.appendChild(check);
+      row.appendChild(label);
+      tasksDiv.appendChild(row);
+    });
 
-const card=document.createElement("div");
-card.className="card";
-
-const title=document.createElement("div");
-title.className="section-title";
-title.textContent=section.title;
-
-const tasksDiv=document.createElement("div");
-tasksDiv.className="tasks";
-
-title.onclick=()=>{
-tasksDiv.style.display=
-tasksDiv.style.display==="block"
-? "none":"block";
-};
-
-section.tasks.forEach((task,tIndex)=>{
-
-const saved=
-localStorage.getItem(`${sIndex}-${tIndex}`)==="true";
-
-const row=document.createElement("div");
-row.className="task";
-
-const check=document.createElement("input");
-check.type="checkbox";
-check.checked=saved;
-
-check.onchange=()=>{
-localStorage.setItem(
-`${sIndex}-${tIndex}`,
-check.checked
-);
-updateProgress();
-};
-
-row.appendChild(check);
-row.append(" "+task);
-
-tasksDiv.appendChild(row);
-
-});
-
-card.appendChild(title);
-card.appendChild(tasksDiv);
-roadmap.appendChild(card);
-
-});
-
-updateProgress();
+    card.appendChild(title); card.appendChild(tasksDiv); roadmap.appendChild(card);
+  });
+  updateProgress();
 }
 
 function updateProgress(){
-
-let total=0;
-let done=0;
-
-roadmapData.forEach((section,s)=>{
-section.tasks.forEach((task,t)=>{
-total++;
-if(localStorage.getItem(`${s}-${t}`)==="true")
-done++;
-});
-});
-
-const percent=Math.round((done/total)*100);
-
-document.getElementById("progressFill")
-.style.width=percent+"%";
-
-document.getElementById("progressText")
-.textContent=percent+"% Complete";
+  if(!currentUser) return;
+  let total=0, done=0;
+  roadmapData.forEach((section,s)=>{ section.tasks.forEach((task,t)=>{ total++; if(localStorage.getItem(storageKey(s,t)) === 'true') done++; }) });
+  const percent = total? Math.round((done/total)*100) : 0;
+  document.getElementById('progressFill').style.width = percent + '%';
+  document.getElementById('progressText').textContent = percent + '% Complete';
 }
 
-function toggleTheme(){
-document.body.classList.toggle("dark");
-}
+function toggleTheme(){ document.body.classList.toggle('dark'); }
 
 function resetProgress(){
-
-if(confirm("Reset all progress?")){
-
-localStorage.clear();
-render();
-
-}
+  if(!currentUser) return;
+  if(confirm('Reset progress for ' + currentUser + '?')){
+    roadmapData.forEach((section,s)=>{ section.tasks.forEach((t,ti)=>{ localStorage.removeItem(storageKey(s,ti)); }) });
+    render();
+  }
 }
 
-render();
+// If you want to auto-login a user during development, uncomment and adjust below:
+// document.getElementById('username').value='me'; document.getElementById('password').value='me123'; doLogin();
 </script>
 
 </body>
