@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cybersecurity Roadmap Tracker</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Bhai&display=swap" rel="stylesheet">
 
 <style>
 :root{
@@ -21,16 +22,48 @@
 
 body{
   margin:0;
-  font-family:Segoe UI, sans-serif;
+  font-family:'Baloo Bhai', 'Segoe UI', sans-serif;
   background:var(--bg);
   color:var(--text);
 }
 
 header{
-  padding:20px;
-  text-align:center;
   background:var(--accent);
   color:white;
+  padding:0; /* we control height with min-height */
+}
+
+.header-inner{
+  max-width:1000px;
+  margin:0 auto;
+  position:relative;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:16px;
+  min-height:120px; /* larger blue area */
+  padding:0 20px 0 128px; /* leave room for absolute logo */
+  box-sizing:border-box;
+}
+
+.logo{
+  position:absolute;
+  left:20px;
+  width:96px;
+  height:96px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.logo svg{display:none}
+.logo img{width:100%;height:100%;object-fit:contain;display:block}
+
+header h1{
+  margin:0;
+  font-size:22px;
+  font-weight:700;
+  text-align:center;
 }
 
 .container{
@@ -87,6 +120,16 @@ header{
   margin-bottom:20px;
 }
 
+@media (max-width:600px){
+  .controls{flex-direction:column}
+  .header-inner{padding:0 12px 0 80px;gap:10px;min-height:96px}
+  header h1{font-size:18px}
+  .logo{left:12px;width:64px;height:64px}
+  .logo svg{width:56px;height:56px}
+  .container{padding:12px}
+  .section-title{font-size:15px}
+}
+
 button{
   padding:10px 15px;
   border:none;
@@ -98,7 +141,12 @@ button{
 <body>
 
 <header>
-<h1>Cybersecurity Degree Preparation Tracker</h1>
+  <div class="header-inner">
+    <div class="logo" aria-hidden="true">
+      <img src="/lOGO.png" alt="Site logo">
+    </div>
+    <h1>Cybersecurity Degree Preparation Tracker</h1>
+  </div>
 </header>
 
 <div class="container">
