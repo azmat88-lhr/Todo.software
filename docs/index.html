@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cybersecurity Roadmap Tracker</title>
+
+<style>
+:root{
+  --bg:#f4f6f9;
+  --card:#ffffff;
+  --text:#222;
+  --accent:#2563eb;
+}
+
+.dark{
+  --bg:#0f172a;
+  --card:#1e293b;
+  --text:#f8fafc;
+}
+
+body{
+  margin:0;
+  font-family:Segoe UI, sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+
+header{
+  padding:20px;
+  text-align:center;
+  background:var(--accent);
+  color:white;
+}
+
+.container{
+  max-width:1000px;
+  margin:auto;
+  padding:20px;
+}
+
+.card{
+  background:var(--card);
+  margin-bottom:15px;
+  border-radius:10px;
+  overflow:hidden;
+  box-shadow:0 3px 10px rgba(0,0,0,.1);
+}
+
+.section-title{
+  padding:15px;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+.tasks{
+  padding:15px;
+  display:none;
+}
+
+.task{
+  margin:8px 0;
+}
+
+.progress-box{
+  margin:20px 0;
+}
+
+.progress{
+  width:100%;
+  height:25px;
+  background:#ddd;
+  border-radius:20px;
+  overflow:hidden;
+}
+
+.progress-fill{
+  height:100%;
+  width:0%;
+  background:green;
+  transition:.3s;
+}
+
+.controls{
+  display:flex;
+  gap:10px;
+  margin-bottom:20px;
+}
+
+button{
+  padding:10px 15px;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+}
+</style>
+</head>
+<body>
+
+<header>
+<h1>Cybersecurity Degree Preparation Tracker</h1>
+</header>
+
+<div class="container">
+
+<div class="controls">
+<button onclick="toggleTheme()">🌙 Dark Mode</button>
+<button onclick="resetProgress()">🔄 Reset Progress</button>
+</div>
+
+<div class="progress-box">
+<h3>Overall Progress</h3>
+<div class="progress">
+<div class="progress-fill" id="progressFill"></div>
+</div>
+<p id="progressText">0%</p>
+</div>
+
+<div id="roadmap"></div>
+
+</div>
+
+<script>
+const roadmapData = [
+{
+title:"Month 1 - Computer Fundamentals",
+tasks:[
+"How Computers Work",
+"Hardware vs Software",
+"CPU Fundamentals",
+"RAM Fundamentals",
+"Storage (HDD vs SSD)",
+"Operating Systems",
+"Files and Directories",
+"Binary Numbers",
+"Hexadecimal Numbers",
+"Algorithms Basics"
+]
+},
+{
+title:"Month 2 - Linux",
+tasks:[
+"Install VirtualBox",
+"Install Ubuntu",
+"Linux File System",
+"Terminal Navigation",
+"Linux Permissions",
+"Users and Groups",
+"Package Management",
+"Linux Networking Commands"
+]
+},
+{
+title:"Month 3 - Python",
+tasks:[
+"Variables",
+"Data Types",
+"Loops",
+"Functions",
+"Lists",
+"Dictionaries",
+"File Handling",
+"Calculator Project",
+"Password Generator Project"
+]
+},
+{
+title:"Month 4 - Networking",
+tasks:[
+"IP Addressing",
+"MAC Addresses",
+"DNS",
+"DHCP",
+"TCP",
+"UDP",
+"HTTP",
+"HTTPS",
+"Wireshark"
+]
+},
+{
+title:"Month 5 - Cybersecurity",
+tasks:[
+"CIA Triad",
+"Malware",
+"Phishing",
+"Ransomware",
+"Encryption",
+"Hashing",
+"Authentication",
+"VPNs",
+"Firewalls"
+]
+},
+{
+title:"Month 6 - Ethical Hacking & Portfolio",
+tasks:[
+"Kali Linux",
+"Nmap",
+"Burp Suite",
+"Reconnaissance",
+"Git",
+"GitHub",
+"Portfolio Website",
+"Port Scanner",
+"Password Checker"
+]
+}
+];
+
+const roadmap = document.getElementById("roadmap");
+
+function render(){
+roadmap.innerHTML="";
+
+roadmapData.forEach((section,sIndex)=>{
+
+const card=document.createElement("div");
+card.className="card";
+
+const title=document.createElement("div");
+title.className="section-title";
+title.textContent=section.title;
+
+const tasksDiv=document.createElement("div");
+tasksDiv.className="tasks";
+
+title.onclick=()=>{
+tasksDiv.style.display=
+tasksDiv.style.display==="block"
+? "none":"block";
+};
+
+section.tasks.forEach((task,tIndex)=>{
+
+const saved=
+localStorage.getItem(`${sIndex}-${tIndex}`)==="true";
+
+const row=document.createElement("div");
+row.className="task";
+
+const check=document.createElement("input");
+check.type="checkbox";
+check.checked=saved;
+
+check.onchange=()=>{
+localStorage.setItem(
+`${sIndex}-${tIndex}`,
+check.checked
+);
+updateProgress();
+};
+
+row.appendChild(check);
+row.append(" "+task);
+
+tasksDiv.appendChild(row);
+
+});
+
+card.appendChild(title);
+card.appendChild(tasksDiv);
+roadmap.appendChild(card);
+
+});
+
+updateProgress();
+}
+
+function updateProgress(){
+
+let total=0;
+let done=0;
+
+roadmapData.forEach((section,s)=>{
+section.tasks.forEach((task,t)=>{
+total++;
+if(localStorage.getItem(`${s}-${t}`)==="true")
+done++;
+});
+});
+
+const percent=Math.round((done/total)*100);
+
+document.getElementById("progressFill")
+.style.width=percent+"%";
+
+document.getElementById("progressText")
+.textContent=percent+"% Complete";
+}
+
+function toggleTheme(){
+document.body.classList.toggle("dark");
+}
+
+function resetProgress(){
+
+if(confirm("Reset all progress?")){
+
+localStorage.clear();
+render();
+
+}
+}
+
+render();
+</script>
+
+</body>
+</html>
